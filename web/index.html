@@ -46,12 +46,19 @@
 
         try {
           const response = await fetch(url);
-          const payload = await response.json();
+          const contentType = response.headers.get("content-type") || "";
+          const isJson = contentType.includes("application/json");
+
           if (!response.ok) {
-            result.textContent = `Request failed (${response.status}): ${JSON.stringify(payload, null, 2)}`;
+            const errorPayload = isJson
+              ? JSON.stringify(await response.json(), null, 2)
+              : await response.text();
+            result.textContent = `Request failed (${response.status}): ${errorPayload}`;
             return;
           }
-          result.textContent = JSON.stringify(payload, null, 2);
+
+          const payload = isJson ? await response.json() : await response.text();
+          result.textContent = isJson ? JSON.stringify(payload, null, 2) : payload;
         } catch (error) {
           result.textContent = `Request failed: ${error.message}`;
         }
