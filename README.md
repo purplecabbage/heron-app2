@@ -21,6 +21,12 @@ npm test
 
 Deploy this project using your App Builder tooling/workspace so the `hello` action is exposed as a web action.
 
+For browser-based calls, configure allowed origins for CORS with `ALLOWED_ORIGINS` (comma-separated), for example:
+
+```bash
+ALLOWED_ORIGINS="https://your-site.example,http://localhost:8080"
+```
+
 ## Use the static webpage
 
 1. Open `/web/index.html` in a browser (or serve the `web` folder with any static server).
