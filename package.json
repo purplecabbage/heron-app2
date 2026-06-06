@@ -1,0 +1,20 @@
+{
+  "name": "heron-app2",
+  "version": "1.0.0",
+  "description": "Simple Adobe App Builder app with one runtime action and a static webpage",
+  "scripts": {
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/purplecabbage/heron-app2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/purplecabbage/heron-app2/issues"
+  },
+  "homepage": "https://github.com/purplecabbage/heron-app2#readme"
+}

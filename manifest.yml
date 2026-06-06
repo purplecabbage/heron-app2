@@ -1,0 +1,7 @@
+packages:
+  heron-app2:
+    actions:
+      hello:
+        function: actions/hello/index.js
+        runtime: nodejs:18
+        web: "yes"
