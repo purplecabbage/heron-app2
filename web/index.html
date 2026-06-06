@@ -47,6 +47,10 @@
         try {
           const response = await fetch(url);
           const payload = await response.json();
+          if (!response.ok) {
+            result.textContent = `Request failed (${response.status}): ${JSON.stringify(payload, null, 2)}`;
+            return;
+          }
           result.textContent = JSON.stringify(payload, null, 2);
         } catch (error) {
           result.textContent = `Request failed: ${error.message}`;
