@@ -30,18 +30,24 @@ test("main defaults CORS origin to null when no origin is allowed", async () => 
   const previous = process.env.ALLOWED_ORIGINS;
   delete process.env.ALLOWED_ORIGINS;
 
-  const result = await main({ __ow_headers: { origin: "https://example.com" } });
+  try {
+    const result = await main({ __ow_headers: { origin: "https://example.com" } });
 
-  assert.equal(result.headers["Access-Control-Allow-Origin"], "null");
-  restoreAllowedOrigins(previous);
+    assert.equal(result.headers["Access-Control-Allow-Origin"], "null");
+  } finally {
+    restoreAllowedOrigins(previous);
+  }
 });
 
 test("main allows configured CORS origin", async () => {
   const previous = process.env.ALLOWED_ORIGINS;
   process.env.ALLOWED_ORIGINS = "https://example.com";
 
-  const result = await main({ __ow_headers: { origin: "https://example.com" } });
+  try {
+    const result = await main({ __ow_headers: { origin: "https://example.com" } });
 
-  assert.equal(result.headers["Access-Control-Allow-Origin"], "https://example.com");
-  restoreAllowedOrigins(previous);
+    assert.equal(result.headers["Access-Control-Allow-Origin"], "https://example.com");
+  } finally {
+    restoreAllowedOrigins(previous);
+  }
 });
