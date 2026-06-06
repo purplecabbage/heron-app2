@@ -26,14 +26,14 @@ test("main returns personalized greeting", async () => {
   assert.equal(result.body.message, "Hello, Adobe!");
 });
 
-test("main defaults CORS origin to null when no origin is allowed", async () => {
+test("main omits CORS header when no origin is allowed", async () => {
   const previous = process.env.ALLOWED_ORIGINS;
   delete process.env.ALLOWED_ORIGINS;
 
   try {
     const result = await main({ __ow_headers: { origin: "https://example.com" } });
 
-    assert.equal(result.headers["Access-Control-Allow-Origin"], "null");
+    assert.equal(result.headers["Access-Control-Allow-Origin"], undefined);
   } finally {
     restoreAllowedOrigins(previous);
   }

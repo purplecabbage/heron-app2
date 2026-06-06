@@ -39,7 +39,13 @@
           return;
         }
 
-        const url = new URL(actionUrl);
+        let url;
+        try {
+          url = new URL(actionUrl);
+        } catch (error) {
+          result.textContent = "Invalid URL format provided.";
+          return;
+        }
         if (name) {
           url.searchParams.set("name", name);
         }

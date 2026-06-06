@@ -21,7 +21,7 @@ npm test
 
 Deploy this project using your App Builder tooling/workspace so the `hello` action is exposed as a web action.
 
-For browser-based calls, configure allowed origins for CORS with `ALLOWED_ORIGINS` (comma-separated), for example:
+For browser-based calls, configure allowed origins for CORS with `ALLOWED_ORIGINS` (comma-separated). The action only sends `Access-Control-Allow-Origin` when the request origin is in this list:
 
 ```bash
 ALLOWED_ORIGINS="https://your-site.example,http://localhost:8080"

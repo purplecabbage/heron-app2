@@ -5,15 +5,17 @@ async function main(params = {}) {
     .split(",")
     .map((origin) => origin.trim())
     .filter(Boolean);
-  const responseOrigin =
-    requestOrigin && allowedOrigins.includes(requestOrigin) ? requestOrigin : "null";
+  const headers = {
+    "Content-Type": "application/json"
+  };
+
+  if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
+    headers["Access-Control-Allow-Origin"] = requestOrigin;
+  }
 
   return {
     statusCode: 200,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": responseOrigin
-    },
+    headers,
     body: {
       ok: true,
       message: `Hello, ${name}!`,
